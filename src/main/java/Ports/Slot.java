@@ -5,26 +5,39 @@
 package Ports;
 
 import java.util.LinkedList;
-import java.util.Queue;
-import org.w3c.dom.Document;
 
 /**
  *
- * @author alfgarci
- */  
+ * @author Jtorr
+ */
 public class Slot {
-
-    private final Queue<Document> testQueue = new LinkedList();
-
-    public Queue getQueue() {
-        return testQueue;
+    
+    private String id; // Para diferenciar un slot de otro
+    
+    private LinkedList<Message> colaMensajes = new LinkedList<>();
+    
+    public Slot(){
+        // ??
+        this.id =null;
     }
-
-    public Document read() throws Exception {
-        return testQueue.remove();
+    public void setId(String id){
+        if(this.id ==null){
+            this.id = id;
+        }
     }
-
-    public void write(Document doc) throws Exception {
-        testQueue.add(doc);
+    public String getId(){
+        return this.id;
     }
+    
+    public Message popMessage(){
+        return this.colaMensajes.poll();
+    }
+    public void pushMessage(Message msg){
+        this.colaMensajes.push(msg);
+    }
+    public boolean isEmpty(){
+        return this.colaMensajes.isEmpty();
+    }
+    
+    
 }
